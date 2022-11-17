@@ -2,6 +2,7 @@ package com.jeangabriel.workshopmongo.config;
 
 import com.jeangabriel.workshopmongo.domain.Post;
 import com.jeangabriel.workshopmongo.domain.User;
+import com.jeangabriel.workshopmongo.dto.AuthorDTO;
 import com.jeangabriel.workshopmongo.repository.PostRepository;
 import com.jeangabriel.workshopmongo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +33,12 @@ public class Instantion implements CommandLineRunner {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 
-        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo abraços", maria);
-        Post post2 = new Post(null, sdf.parse("21/03/2018"), "Bom dia", "Acordei Feliz hoje!", maria);
-
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
+
+
+        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo abraços", new AuthorDTO(maria));
+        Post post2 = new Post(null, sdf.parse("21/03/2018"), "Bom dia", "Acordei Feliz hoje!", new AuthorDTO(maria));
+
         postRepository.saveAll(Arrays.asList(post1, post2));
     }
 }
